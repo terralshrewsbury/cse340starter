@@ -116,12 +116,21 @@ Be sure to carefully review the code, particularly lines 9 through 25 to underst
 * function to build vehicle detail HTML
 * ************************************ */ 
 Util.buildVehicleDetailHTML = function(vehicleData) {
+  // Format the price with currency and commas
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',    
+  }).format(vehicleData.inv_price);
+
+  // Format the mileage with commas
+  const formattedMiles = new Intl.NumberFormat('en-US').format(vehicleData.inv_miles);
+
   return `
     <div class="vehicle-details">
       <h2>${vehicleData.inv_make} ${vehicleData.inv_model}</h2>
       <p><strong>Year:</strong> ${vehicleData.inv_year}</p>
-      <p><strong>Price:</strong> $${vehicleData.inv_price}</p>
-      <p><strong>Mileage:</strong> ${vehicleData.inv_miles} miles</p>
+      <p><strong>Price:</strong> ${formattedPrice}</p> <!-- Corrected here -->
+      <p><strong>Mileage:</strong> ${formattedMiles} miles</p>
       <p><strong>Description:</strong> ${vehicleData.inv_description}</p>
       <img src="${vehicleData.inv_image}" alt="${vehicleData.inv_make} ${vehicleData.inv_model}" />
     </div>
@@ -129,3 +138,4 @@ Util.buildVehicleDetailHTML = function(vehicleData) {
 }
 
 module.exports = Util;
+
