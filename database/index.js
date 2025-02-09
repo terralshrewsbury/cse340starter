@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == "development") { //an if test to see if the code exi
   pool = new Pool({ //creates a new pool instance from the imported Pool class.
     connectionString: process.env.DATABASE_URL, //indicates how the pool will connect to the database (use a connection string) and the value of the string is stored in a name - value pair, which is in the .env file locally, and in an "environment variable" on a remote server. These are equivelent concepts, but different implementations.
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: true,
     }, //describes how the Secure Socket Layer (ssl) is used in the connection to the database, but only in a remote connection, as exists in our development environment.
 }) // ends the pool function started on line 11. SSL is a means of excrypting the flow of information from one network location to another. In this case, when we attempt to communicate with the remote database server from our own computer the code indicates that the server should not reject our connection. However, when we work in a remote production server, the ssl lines must not exist. This is because our application server and the database server will be in the same system and their communication will be secure, which is what we will require.
 
