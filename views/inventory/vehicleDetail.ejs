@@ -1,0 +1,17 @@
+<%# Vehicle Title %>
+<% if (title) { %> 
+    <h1><%= title %></h1>
+<% } else { 
+    res.redirect('/') 
+} %>
+
+<%# Vehicle Details Section %>
+<% if (vehicleHTML) { %>
+    <div class="vehicle-detail">
+        <%- vehicleHTML %> 
+    </div>
+<% } else { %>
+    <p>Vehicle details not available.</p>
+<% } %>
+
+
