@@ -3,6 +3,8 @@ const baseController = {}
 
 baseController.buildHome = async function(req, res){
   const nav = await utilities.getNav()
+  /*req.flash("notice", "This is a flash message.")*/
+  /*While this may seem like a lot of setup, it is a one-time event. From now on, if you need to send a message from a controller to a view, when using res.render(), or res.redirect(), you can. It makes moving messages around very easy.*/
   res.render("index", {title: "Home", nav})
 }
 
@@ -19,3 +21,4 @@ Line 7 - ends the function started on line 4.
 Line 8 - left intentionally blank.
 Line 9 - exports the baseController object for use elsewhere.
 *************** */
+

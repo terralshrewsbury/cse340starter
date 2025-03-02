@@ -137,5 +137,14 @@ Util.buildVehicleDetailHTML = function(vehicleData) {
   `;
 }
 
-module.exports = Util;
+function handleErrors(fn) {
+  return function (req, res, next) {
+    // Catching any errors and passing them to the next middleware (error handler)
+    fn(req, res, next).catch(next);
+  };
+}
+
+module.exports = { handleErrors, ...Util };
+
+//module.exports = Util;
 

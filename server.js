@@ -15,6 +15,34 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute");
 const intentionalErrorRoute = require("./routes/intentionalError.js");
 const Util = require("./utilities")
+const session = require("express-session")
+const pool = require('./database')
+const accountRoute = require("./routes/accountRoute");
+app.use("/account", accountRoute);
+
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}));
+/*https://blainerobertson.github.io/340-js/views/session-message.html */
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+});
+
 
 /* ***********************
  * View Engine and Templates
@@ -46,6 +74,9 @@ app.use() is an Express function that directs the application to use the resourc
 /inv is a keyword in our application, indicating that a route that contains this word will use this route file to work with inventory-related processes; "inv" is simply a short version of "inventory".
 inventoryRoute is the variable representing the inventoryRoute.js file which was required (brought into the scope of the server.js file) earlier. */
 //In short, any route that starts with /inv will then be redirected to the inventoryRoute.js file, to find the rest of the route in order to fulfill the request.
+
+// Account routes
+app.use("/account", accountRoute); 
 
 // Use the intentional error route
 app.use(intentionalErrorRoute);

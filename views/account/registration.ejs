@@ -1,0 +1,34 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %> 
+<%- include('../partials/navigation') %> 
+
+<h1><%= title %></h1>
+
+<div class="registration">
+    <form action="/account/registration" method="POST">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+
+        <label for="account_email">Email:</label>
+        <input type="email" id="account_email" name="account_email" required>
+
+        <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password" required>
+        <p>Password must contain:</p>
+            <ul>
+                <li>12 characters in length, minimum</li>
+                <li>contain at least 1 capital letter</li>
+                <li>contain at least 1 number</li>
+                <li>contain at least 1 special character</li>
+            </ul>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/account/login">Login here</a></p>
+</div>
+
+<%- include('../partials/footer') %> 
